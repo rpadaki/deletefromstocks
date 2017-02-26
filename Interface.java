@@ -40,6 +40,7 @@ public class Interface {
             message = new Fill(st);
         } else {
             message = new Message();
+            System.out.println("MSG: " + input);
         }
         message.type = type;
         return message;
@@ -132,7 +133,7 @@ public class Interface {
                     System.out.println("ACK");
                     ack((Ack) m);
                 } else if(type.equals("REJECT")) {
-                    System.out.println("REJECT" + ((Reject) m).msg);
+                    System.out.println("REJECT" + " " + ((Reject) m).msg);
                     reject((Reject) m);
                 } else if(type.equals("BOOK")) {
                     System.out.println("BOOK");
