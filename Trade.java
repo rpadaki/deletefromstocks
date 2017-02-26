@@ -6,8 +6,8 @@ public class Trade {
         // always have orders of 99-101 in
         int sellamount = Bond.q() - Bond.selling() + Bond.limit;
         int buyamount = - Bond.q() - Bond.buying() + Bond.limit;
-        Interface.sell("BOND", 101, sellamount);
-        Interface.buy("BOND", 99, buyamount);
+        Interface.sell("BOND", 1001, sellamount);
+        Interface.buy("BOND", 999, buyamount);
         return;
     }
 
