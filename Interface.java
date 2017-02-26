@@ -165,6 +165,10 @@ public class Interface {
         }
     }
 
+    public static void cancel(String id) {
+        printToFeed("CANCEL " + id);
+    }
+
     public static void run() throws IOException {
         while(true) {
             try {
@@ -187,6 +191,20 @@ public class Interface {
                 }
             } catch(Exception e) {
                 e.printStackTrace(ps);
+            }
+
+            for(String symbol : SYMBOLS) {
+                Stock stock = stocks.get(symbol);
+                for(Order ord : stock.ourBids) {
+                    if(System.currentTimeMillis() - ord.timestamp > 2000) {
+                        cancel(ord.id);
+                    }
+                }
+                for(Order ord : stock.ourOffers) {
+                    if(System.currentTimeMillis() - ord.timestamp > 2000) {
+                        cancel(ord.id);
+                    }
+                }
             }
 
             for(String symbol : SYMBOLS) {
