@@ -4,19 +4,12 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.net.Socket;
 
-public class Bot {
+public class deletefromstocks {
     public static void main(String[] args) {
         try {
-            Socket skt = new Socket("test-exch-deletefromstocks", 20000);
-            BufferedReader from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream()));
-            PrintWriter to_exchange = new PrintWriter(skt.getOutputStream(), true);
-
-            to_exchange.println("HELLO DELETEFROMSTOCKS");
-            String reply = from_exchange.readLine().trim();
-            System.err.printf("The exchange replied: %s\n", reply);
-        }
-        catch (Exception e)
-        {
+            Interface.init();
+            Interface.run();
+        } catch (Exception e) {
             e.printStackTrace(System.out);
         }
     }
