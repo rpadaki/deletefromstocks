@@ -194,15 +194,24 @@ public class Interface {
             }
 
             for(String symbol : SYMBOLS) {
+                if(symbol.equals("BOND")) {
+                    continue;
+                }
                 Stock stock = stocks.get(symbol);
-                for(Order ord : stock.ourBids) {
+                Iterator<Order> iter = stock.ourBids.iterator();
+                while(iter.hasNext()) {
+                    Order ord = iter.next();
                     if(System.currentTimeMillis() - ord.timestamp > 2000) {
                         cancel(ord.id);
+                        iter.remove();
                     }
                 }
-                for(Order ord : stock.ourOffers) {
+                Iterator<Order> iter1 = stock.ourOffers.iterator();
+                while(iter1.hasNext()) {
+                    Order ord = iter1.next();
                     if(System.currentTimeMillis() - ord.timestamp > 2000) {
                         cancel(ord.id);
+                        iter1.remove();
                     }
                 }
             }
