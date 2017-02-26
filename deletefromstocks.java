@@ -8,9 +8,10 @@ public class deletefromstocks {
     public static void main(String[] args) {
         try {
             String hostname = "test-exch-deletefromstocks";
-            if(args.length == 3){
-                hostname = args[2];
+            if(args.length == 1){
+                hostname = args[0];
             }
+            System.out.println(args.length);
             System.out.println("HOST: " + hostname);
             Interface.init(hostname);
             Interface.run();
