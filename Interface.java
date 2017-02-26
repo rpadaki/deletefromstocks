@@ -16,8 +16,7 @@ public class Interface {
     public static HashMap<String,Stock> stocks;
 
     public static int order_id;
-    static HashMap<String,Order> pending_orders, current_orders;
-
+    static HashMap<String,Order> pending_orders;
 
     public static void printToFeed(String s) {
         to_exchange.println(s);
@@ -36,6 +35,8 @@ public class Interface {
             message = new Reject(st);
         } else if(type.equals("BOOK")) {
             message = new Book(st);
+        } else if(type.equals("FILL")) {
+            message = new Fill(st);
         } else {
             message = new Message();
         }
@@ -65,7 +66,7 @@ public class Interface {
     }
 
     public static void makeOrder(Order order) {
-        printToFeed("ADD" + order.id + " " + order.symbol + " " + order.type + " " + order.pos.price + " " + order.pos.size);
+        printToFeed("ADD " + order.id + " " + order.symbol + " " + order.type + " " + order.pos.price + " " + order.pos.size);
         pending_orders.put(order.id, order);
     }
 
@@ -74,15 +75,24 @@ public class Interface {
         makeOrder(new Order("BUY", id, symbol, price, size));
     }
 
-    public static void sell() {
+    public static void sell(String symbol, int price, int size) {
+        String id = Integer.toString(order_id++);
+        makeOrder(new Order("SELL", id, symbol, price, size));
     }
 
-    public static void convert() {
+    public static void convert(String symbol, String type, int size) {
+        String id = Integer.toString(order_id++);
+        // printToFeed("CONVERT " + id + " " + symbol + " " + type + " " + size);
     }
 
     public static void ack(Ack m) {
         Order order = pending_orders.get(m.id);
-        current_orders.put(order.id, order);
+        Stock stock = stocks.get(order.symbol);
+        if(order.type.equals("BUY")) {
+            stock.ourBids.add(order);
+        } else {
+            stock.ourOffers.add(order);
+        }
         pending_orders.remove(m.id);
     }
 
@@ -91,6 +101,23 @@ public class Interface {
     }
 
     public static void book(Book m) {
+        stocks.get(m.symbol).updatePositions(m.buy, m.sell);
+    }
+
+    public static void fill(Fill m) {
+        Stock stock = stocks.get(m.symbol);
+        for(Order ord : stock.ourOffers) {
+            if(ord.id.equals(m.id)) {
+                ord.pos.size -= m.pos.size;
+                stock.portfolio -= m.pos.size;
+            }
+        }
+        for(Order ord : stock.ourBids) {
+            if(ord.id.equals(m.id)) {
+                ord.pos.size -= m.pos.size;
+                stock.portfolio += m.pos.size;
+            }
+        }
     }
 
     public static void run() throws IOException {
@@ -105,6 +132,8 @@ public class Interface {
                     reject((Reject) m);
                 } else if(type.equals("BOOK")) {
                     book((Book) m);
+                } else if(type.equals("FILL")) {
+                    fill((Fill) m);
                 } else {
                 }
             } catch(Exception e) {

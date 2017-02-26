@@ -2,12 +2,13 @@ import java.util.*;
 
 public class Trade {
 	public static void tradebond(int id, boolean buy) {
+		Stock Bond = Interface.stocks.get("BOND");
 		// always have orders of 99-101 in
 		int sellamount = Bond.q() - Bond.selling() + Bond.limit;
 		int buyamount = Bond.q() - Bond.buying() - Bond.limit;
-		sell("Bond", 101, sellamount);
-		buy("Bond", 99, buyamount);
-		return
+		Interface.sell("BOND", 101, sellamount);
+		Interface.buy("BOND", 99, buyamount);
+		return;
 	}
 
 	public static void tradeval(int id) {
@@ -27,7 +28,9 @@ public class Trade {
 		and by interval we mean low is for valbs and high is vale
 		or vice versa
 
-		*/ 
+		*/
+		Stock Vale = Interface.stocks.get("VALE");
+		Stock Valbz = Interface.stocks.get("VALBZ");
 		int valelow = Vale.bestBid().price;
 		int valehigh = Vale.bestOffer().price;
 		int valbzlow = Valbz.bestBid().price;
@@ -37,23 +40,23 @@ public class Trade {
 			int numtoexchange = Math.min(Valbz.bestBid().size, Vale.bestOffer().size);
 			int numtoconvert = Math.min(numtoexchange - Valbz.limit + Valbz.q(), numtoexchange - (-1) * Vale.limit + Vale.q());
 			if (numtoconvert > 0) {
-				convert("Valbz", numtoconvert);
+				// Interface.convert("VALBZ", numtoconvert);
 			}
-			sell("Vale", valelow, numtoexchange);
-			buy("Valbz", valbzhigh, numtoexchange);
+			Interface.sell("VALE", valelow, numtoexchange);
+			Interface.buy("VALBZ", valbzhigh, numtoexchange);
 		}
 		else if (valbzlow - valehigh > 10) {
 			int numtoexchange = Math.min(Valbz.bestOffer().size, Vale.bestBid().size);
 			int numtoconvert = Math.min(numtoexchange - (-1) * Valbz.limit + Valbz.q(), numtoexchange - Vale.limit + Vale.q());
 			if (numtoconvert > 0) {
-				convert("Vale", numtoconvert);
+				// Interface.convert("VALE", numtoconvert);
 			}
-			sell("Valbz", valbzlow, numtoexchange);
-			buy("Vale", valehigh, numtoexchange);
+			Interface.sell("VALBZ", valbzlow, numtoexchange);
+			Interface.buy("VALE", valehigh, numtoexchange);
 		}
 	}
 
-	pubic static void tradexlf() {
+	public static void tradexlf() {
 		/* so similarly if ten xlf is more/less than the sum of the components then sell/buy
 		and do this until you hit the limit
 		in which case you then do so if the difference is more than 100
@@ -63,6 +66,6 @@ public class Trade {
 		but do this if its unbalanced
 
 		*/
-		return
+		return;
 	}
 }
