@@ -13,10 +13,10 @@ public class Interface {
     public static Socket skt;
     public static BufferedReader from_exchange;
     public static PrintWriter to_exchange;
-    public static HashMap<String,Stock> stocks;
+    public static HashMap<String,Stock> stocks = new HashMap<>();
 
     public static int order_id;
-    static HashMap<String,Order> pending_orders;
+    static HashMap<String,Order> pending_orders = new HashMap<>();
 
     public static void printToFeed(String s) {
         to_exchange.println(s);
