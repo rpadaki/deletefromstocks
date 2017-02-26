@@ -54,7 +54,7 @@ public class Interface {
         return parseMessage(s);
     }
 
-    public static void init(String hostname) throws IOException {
+    public static void init(String hostname, int port) throws IOException {
         Random rand = new Random();
         order_id = Math.abs(rand.nextInt()) % 1000000;
 
@@ -64,7 +64,7 @@ public class Interface {
             stocks.put(symbol, new Stock(symbol, limit));
         }
 
-        skt = new Socket(hostname, 20000);
+        skt = new Socket(hostname, port);
         from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream()));
         to_exchange = new PrintWriter(skt.getOutputStream(), true);
         printToFeed("HELLO DELETEFROMSTOCKS");
