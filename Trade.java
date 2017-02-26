@@ -91,6 +91,7 @@ public class Trade {
 
     public static void hedgeVal(String type, int amount) {
     	// called when fill fills an order of VALE
+        Stock Valbz = Interface.stocks.get("VALBZ");
     	if (type.equals("SELL")) {
     		// +10 in case the best offer does not have the right amount
     		Interface.buy("VALBZ", Valbz.bestOffer().price + 10, amount);
