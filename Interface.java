@@ -4,7 +4,7 @@ import java.net.Socket;
 import java.util.*;
 
 public class Interface {
-    public static String ERROR_FILE = "error.txt";
+    public static String ERROR_FILE = "error";
     public static String[] SYMBOLS = {"BOND", "VALBZ", "VALE", "GS", "MS", "WFC", "XLF"};
     public static int[] LIMITS = {100, 10, 10, 100, 100, 100, 100};
 
@@ -61,6 +61,7 @@ public class Interface {
 
     public static void init(String hostname, int port) throws IOException {
         hn = hostname;
+        log = new File(ERROR_FILE + hn + ".txt");
         ps = new PrintStream(log);
 
         Random rand = new Random();
