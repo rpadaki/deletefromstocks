@@ -213,7 +213,7 @@ public class Interface {
                 try {
                     System.out.println("TRADE");
                     Trade.tradeVal();
-                    // Trade.hedgeVal();
+                    Trade.makeMarketVal();
                 } catch(Exception e) {
                     e.printStackTrace(ps);
                 }

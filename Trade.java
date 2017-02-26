@@ -65,8 +65,6 @@ public class Trade {
     public static void makeMarketVal() {
     	Stock Vale = Interface.stocks.get("VALE");
         Stock Valbz = Interface.stocks.get("VALBZ");
-        int valelow = Vale.bestBid().price;
-        int valehigh = Vale.bestOffer().price;
         int valbzlow = Valbz.bestBid().price;
         int valbzhigh = Valbz.bestOffer().price;
 
