@@ -200,8 +200,8 @@ public class Interface {
                 e.printStackTrace(ps);
             }
 
-            System.out.println(hn);
             if (!hn.equals("production")) {
+                System.out.println(hn);
                 try {
                     System.out.println("TRADE");
                     // Trade.tradeVal();
