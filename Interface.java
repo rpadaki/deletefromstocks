@@ -52,12 +52,7 @@ public class Interface {
         return parseMessage(s);
     }
 
-    public static void init() throws IOException {
-        skt = new Socket("test-exch-deletefromstocks", 20000);
-        from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream()));
-        to_exchange = new PrintWriter(skt.getOutputStream(), true);
-        printToFeed("HELLO DELETEFROMSTOCKS");
-
+    public static void init(String hostname) throws IOException {
         Random rand = new Random();
         order_id = Math.abs(rand.nextInt()) % 1000000;
 
@@ -66,6 +61,11 @@ public class Interface {
             int limit = LIMITS[i];
             stocks.put(symbol, new Stock(symbol, limit));
         }
+
+        skt = new Socket(hostname, 20000);
+        from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream()));
+        to_exchange = new PrintWriter(skt.getOutputStream(), true);
+        printToFeed("HELLO DELETEFROMSTOCKS");
     }
 
     public static void makeOrder(Order order) {

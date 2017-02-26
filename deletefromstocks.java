@@ -7,7 +7,12 @@ import java.net.Socket;
 public class deletefromstocks {
     public static void main(String[] args) {
         try {
-            Interface.init();
+            String hostname = "test-exch-deletefromstocks";
+            if(args.length == 3){
+                hostname = args[2];
+            }
+            System.out.println("HOST: " + hostname);
+            Interface.init(hostname);
             Interface.run();
         } catch (Exception e) {
             e.printStackTrace(System.out);
