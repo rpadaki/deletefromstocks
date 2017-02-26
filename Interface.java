@@ -143,12 +143,21 @@ public class Interface {
         }
     }
 
+    public static void hello(Hello m) {
+        for(int i = 0; i < m.symbols.size(); i++) {
+            String symbol = m.symbols.get(i);
+            int pos = m.positions.get(i);
+            stocks.get(symbol).portfolio = pos;
+        }
+    }
+
     public static void run() throws IOException {
         while(true) {
             try {
                 Message m = readFromFeed();
                 String type = m.type;
                 if(type.equals("HELLO")) {
+                    hello((Hello) m);
                 } else if(type.equals("ACK")) {
                     ack((Ack) m);
                 } else if(type.equals("REJECT")) {
