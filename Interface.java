@@ -133,7 +133,7 @@ public class Interface {
                     System.out.println("ACK");
                     ack((Ack) m);
                 } else if(type.equals("REJECT")) {
-                    System.out.println("REJECT" + " " + m.id + " " + ((Reject) m).msg);
+                    System.out.println("REJECT" + " " + ((Reject) m).id + " " + ((Reject) m).msg);
                     reject((Reject) m);
                 } else if(type.equals("BOOK")) {
                     System.out.println("BOOK");
