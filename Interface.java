@@ -206,6 +206,7 @@ public class Interface {
                 try {
                     System.out.println("TRADE");
                     Trade.tradeVal();
+                    Trade.hedgeVal();
                 } catch(Exception e) {
                     e.printStackTrace(System.out);
                 }
