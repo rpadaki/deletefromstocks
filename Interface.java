@@ -38,6 +38,8 @@ public class Interface {
             message = new Book(st);
         } else if(type.equals("FILL")) {
             message = new Fill(st);
+        } else if(type.equals("CLOSE")) {
+            message = new Close(st);
         } else {
             message = new Message();
             System.out.println("MSG: " + input);
@@ -52,7 +54,7 @@ public class Interface {
         return parseMessage(s);
     }
 
-    public static void init(String hostname) throws IOException {
+    public static void init(String hostname, int port) throws IOException {
         Random rand = new Random();
         order_id = Math.abs(rand.nextInt()) % 1000000;
 
@@ -62,7 +64,7 @@ public class Interface {
             stocks.put(symbol, new Stock(symbol, limit));
         }
 
-        skt = new Socket(hostname, 20000);
+        skt = new Socket(hostname, port);
         from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream()));
         to_exchange = new PrintWriter(skt.getOutputStream(), true);
         printToFeed("HELLO DELETEFROMSTOCKS");
@@ -141,12 +143,21 @@ public class Interface {
         }
     }
 
+    public static void hello(Hello m) {
+        for(int i = 0; i < m.symbols.size(); i++) {
+            String symbol = m.symbols.get(i);
+            int pos = m.positions.get(i);
+            stocks.get(symbol).portfolio = pos;
+        }
+    }
+
     public static void run() throws IOException {
         while(true) {
             try {
                 Message m = readFromFeed();
                 String type = m.type;
                 if(type.equals("HELLO")) {
+                    hello((Hello) m);
                 } else if(type.equals("ACK")) {
                     ack((Ack) m);
                 } else if(type.equals("REJECT")) {
@@ -156,6 +167,8 @@ public class Interface {
                     book((Book) m);
                 } else if(type.equals("FILL")) {
                     fill((Fill) m);
+                } else if(type.equals("CLOSE")) {
+                    System.exit(0);
                 } else {
                 }
             } catch(Exception e) {
