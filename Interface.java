@@ -47,8 +47,9 @@ public class Interface {
     }
 
     public static Message readFromFeed() throws IOException {
-        String input = from_exchange.readLine().trim();
-        return parseMessage(input);
+        String s = from_exchange.readLine().trim();
+        System.out.println(s);
+        return parseMessage(s);
     }
 
     public static void init() throws IOException {
@@ -73,11 +74,13 @@ public class Interface {
     }
 
     public static void buy(String symbol, int price, int size) {
+        if(size <= 0) return;
         String id = Integer.toString(order_id++);
         makeOrder(new Order("BUY", id, symbol, price, size));
     }
 
     public static void sell(String symbol, int price, int size) {
+        if(size <= 0) return;
         String id = Integer.toString(order_id++);
         makeOrder(new Order("SELL", id, symbol, price, size));
     }
@@ -128,22 +131,23 @@ public class Interface {
                 Message m = readFromFeed();
                 String type = m.type;
                 if(type.equals("HELLO")) {
-                    System.out.println("HELLO");
                 } else if(type.equals("ACK")) {
-                    System.out.println("ACK");
                     ack((Ack) m);
                 } else if(type.equals("REJECT")) {
                     System.out.println("REJECT" + " " + ((Reject) m).id + " " + ((Reject) m).msg);
                     reject((Reject) m);
                 } else if(type.equals("BOOK")) {
-                    System.out.println("BOOK");
                     book((Book) m);
                 } else if(type.equals("FILL")) {
-                    System.out.println("FILL");
                     fill((Fill) m);
                 } else {
                 }
             } catch(Exception e) {
+            }
+
+            for(String symbol : SYMBOLS) {
+                Stock stock = stocks.get(symbol);
+                System.out.println(stock.portfolio);
             }
 
             try {
