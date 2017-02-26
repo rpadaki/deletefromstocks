@@ -230,7 +230,7 @@ public class Interface {
             if (!hn.equals("production")) {
                 try {
                     System.out.println("TRADE");
-                    // Trade.tradeVal();
+                    Trade.tradeVal();
                     Trade.makeMarketVal();
                 } catch(Exception e) {
                     e.printStackTrace(ps);
