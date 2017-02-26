@@ -204,7 +204,7 @@ public class Interface {
                 System.out.println(hn);
                 try {
                     System.out.println("TRADE");
-                    // Trade.tradeVal();
+                    Trade.tradeVal();
                 } catch(Exception e) {
                     e.printStackTrace(ps);
                 }
