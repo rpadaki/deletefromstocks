@@ -1,9 +1,9 @@
 import java.util.*;
 
 public class Ack extends Message {
-  int id;
+    String id;
 
-  public Ack(StringTokenizer st) {
-    id = Integer.parseInt(st.nextToken());
-  }
+    public Ack(StringTokenizer st) {
+        id = st.nextToken();
+    }
 }
