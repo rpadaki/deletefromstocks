@@ -1,14 +1,6 @@
 import java.util.*;
 
 public class Book extends Message {
-  class Position {
-    int price, size;
-    Position(int price, int size) {
-      this.price = price;
-      this.size = size;
-    }
-  }
-
   String symbol;
   ArrayList<Position> buy, sell;
 
