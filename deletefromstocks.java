@@ -4,12 +4,9 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.net.Socket;
 
-public class Bot
-{
-    public static void main(String[] args)
-    {
-        try
-        {
+public class Bot {
+    public static void main(String[] args) {
+        try {
             Socket skt = new Socket("test-exch-deletefromstocks", 20000);
             BufferedReader from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream()));
             PrintWriter to_exchange = new PrintWriter(skt.getOutputStream(), true);
