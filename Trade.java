@@ -89,14 +89,19 @@ public class Trade {
         }
     }
 
-    public static void hedgeVal(String type, int amount) {
+    public static void hedgeVal() {
     	// called when fill fills an order of VALE
-    	if (type.equals("SELL")) {
+    	// actually we can just run this all the time
+    	Stock Vale = Interface.stocks.get("VALE");
+        Stock Valbz = Interface.stocks.get("VALBZ");
+    	int amount = Valbz.q() + Vale.q();
+
+    	if (amount < 0) {
     		// +10 in case the best offer does not have the right amount
-    		Interface.buy("VALBZ", Valbz.bestOffer().price + 10, amount);
+    		Interface.buy("VALBZ", Valbz.bestOffer().price, - amount);
     	}
     	else {
-    		Interface.sell("VALBZ", Valbz.bestBid().price - 10, amount);
+    		Interface.sell("VALBZ", Valbz.bestBid().price, amount);
     	}
     }
 
