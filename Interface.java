@@ -56,16 +56,18 @@ public class Interface {
     order_id = rand.nextInt();
 
     for(int i = 0; i < SYMBOLS.length; i++){
+      String symbol = SYMBOLS[i];
+      int limit = LIMITS[i];
+      Stocks.put(symbol, new Stock(symbol, limit));
     }
   }
 
-  static HashMap<String,Offer> currentOffers;
-  static HashMap<String,Offer> pendingOffers;
+  public static void makeOrder() {
+  }
 
-  public static void makeOffer(String type
-
-  public static void buy(String stock, int price, int size) {
-    stocks[stock].makeOrder("BUY", price, size);
+  public static void buy(String symbol, int price, int size) {
+    String id = String.toString(order_id++);
+    makeOrder(new Order("BUY", id, symbol, price, size));
   }
 
   public static void sell() {

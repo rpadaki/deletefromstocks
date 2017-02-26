@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Stock {
   String symbol;
-  ArrayList<Position> marketBids, marketOffers;
+  ArrayList<Position> marketBids, marketOffers, ourBids, ourOffers;
   int limit;
 
   public Stock(String symbol, int limit) {
