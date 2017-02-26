@@ -26,6 +26,9 @@ public class Interface {
     public static Message parseMessage(String input) {
         StringTokenizer st = new StringTokenizer(input);
         String type = st.nextToken();
+        if(type.equals("CLOSE")){
+            System.exit(0);
+        }
         Message message;
         if(type.equals("HELLO")) {
             message = new Hello(st);
@@ -172,6 +175,7 @@ public class Interface {
                 } else {
                 }
             } catch(Exception e) {
+                e.printStackTrace(System.out);
             }
 
             for(String symbol : SYMBOLS) {
@@ -182,8 +186,15 @@ public class Interface {
             try {
                 System.out.println("TRADE");
                 Trade.tradeBonds();
+            } catch(Exception e) {
+                e.printStackTrace(System.out);
+            }
+
+            try {
+                System.out.println("TRADE");
                 Trade.tradeVal();
             } catch(Exception e) {
+                e.printStackTrace(System.out);
             }
         }
     }

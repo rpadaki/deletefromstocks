@@ -36,6 +36,8 @@ public class Trade {
         int valbzlow = Valbz.bestBid().price;
         int valbzhigh = Valbz.bestOffer().price;
 
+        System.out.println((valelow - valbzhigh) + " " + (valbzlow - valehigh));
+
         if (valelow - valbzhigh > 0) {
             int numtoexchange = Math.min(Valbz.bestBid().size, Vale.bestOffer().size);
             int numtoconvert = Math.min(numtoexchange - Valbz.limit + Valbz.q(), numtoexchange - (-1) * Vale.limit + Vale.q());
