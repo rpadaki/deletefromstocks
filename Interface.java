@@ -168,6 +168,7 @@ public class Interface {
             try {
                 System.out.println("TRADE");
                 Trade.tradeBonds();
+                Trade.tradeVal();
             } catch(Exception e) {
             }
         }

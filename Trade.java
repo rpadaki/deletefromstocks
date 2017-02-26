@@ -11,7 +11,7 @@ public class Trade {
         return;
     }
 
-    public static void tradeval(int id) {
+    public static void tradeVal() {
 		/* if one is higher than the other, buy the first and sell the second
 		issues comes up if one is always higher than the other
 		at that point buy if one is more than 10 higher than the other and convert
@@ -40,7 +40,7 @@ public class Trade {
             int numtoexchange = Math.min(Valbz.bestBid().size, Vale.bestOffer().size);
             int numtoconvert = Math.min(numtoexchange - Valbz.limit + Valbz.q(), numtoexchange - (-1) * Vale.limit + Vale.q());
             if (numtoconvert > 0) {
-                // Interface.convert("VALBZ", numtoconvert);
+                Interface.convert("VALE", "BUY", numtoconvert);
             }
             Interface.sell("VALE", valelow, numtoexchange);
             Interface.buy("VALBZ", valbzhigh, numtoexchange);
@@ -49,7 +49,7 @@ public class Trade {
             int numtoexchange = Math.min(Valbz.bestOffer().size, Vale.bestBid().size);
             int numtoconvert = Math.min(numtoexchange - (-1) * Valbz.limit + Valbz.q(), numtoexchange - Vale.limit + Vale.q());
             if (numtoconvert > 0) {
-                // Interface.convert("VALE", numtoconvert);
+                Interface.convert("VALE", "SELL", numtoconvert);
             }
             Interface.sell("VALBZ", valbzlow, numtoexchange);
             Interface.buy("VALE", valehigh, numtoexchange);
