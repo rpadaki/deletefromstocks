@@ -1,8 +1,8 @@
 import java.util.*;
 
 public class Hello extends Message {
-    ArrayList<String> symbols;
-    ArrayList<Integer> positions;
+    ArrayList<String> symbols = new ArrayList<>();
+    ArrayList<Integer> positions = new ArrayList<>();
 
     public Hello(StringTokenizer st) {
         while(st.hasMoreTokens()) {

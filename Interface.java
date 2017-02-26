@@ -7,6 +7,7 @@ import java.util.*;
 import java.io.IOException;
 
 public class Interface {
+    public static String ERROR_FILE = "error.txt";
     public static String[] SYMBOLS = {"BOND", "VALBZ", "VALE", "GS", "MS", "WFC", "XLF"};
     public static int[] LIMITS = {100, 10, 10, 100, 100, 100, 100};
 
@@ -194,7 +195,7 @@ public class Interface {
 
             try {
                 System.out.println("TRADE");
-                Trade.tradeVal();
+                // Trade.tradeVal();
             } catch(Exception e) {
                 e.printStackTrace(System.out);
             }

@@ -11,6 +11,8 @@ public class Stock {
     this.limit = limit;
     ourBids = new ArrayList<>();
     ourOffers = new ArrayList<>();
+    marketBids = new ArrayList<>();
+    marketOffers = new ArrayList<>();
   }
 
   public void updatePositions(ArrayList<Position> bids, ArrayList<Position> offers) {
