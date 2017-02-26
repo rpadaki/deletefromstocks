@@ -17,36 +17,37 @@ public class Interface {
     to_exchange.println(s);
   }
 
-  public static Message readFromFeed() throws IOException {
-    String input = from_exchange.readLine().trim();
+  public static Message parseMessage(String input) {
     StringTokenizer st = new StringTokenizer(input);
     String type = st.nextToken();
     Message message;
     if(type.equals("HELLO")) {
       message = new Hello(st);
+      System.out.println(((Hello) message).positions);
     } else if(type.equals("ACK")) {
       message = new Ack(st);
     } else if(type.equals("REJECT")) {
       message = new Reject(st);
     } else {
-      message = new Message(st);
+      message = new Message();
     }
     message.type = type;
     return message;
   }
 
-  public static void init() {
-    try {
-      skt = new Socket("test-exch-deletefromstocks", 20000);
-      from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream()));
-      to_exchange = new PrintWriter(skt.getOutputStream(), true);
-      communicate("HELLO DELETEFROMSTOCKS");
-    } catch (Exception e) {
-      e.printStackTrace(System.out);
-    }
+  public static Message readFromFeed() throws IOException {
+    String input = from_exchange.readLine().trim();
+    return parseMessage(input);
   }
 
-  public static void run() {
+  public static void init() throws IOException {
+    skt = new Socket("test-exch-deletefromstocks", 20000);
+    from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream()));
+    to_exchange = new PrintWriter(skt.getOutputStream(), true);
+    communicate("HELLO DELETEFROMSTOCKS");
+  }
+
+  public static void run() throws IOException {
     while(true) {
       Message m = readFromFeed();
     }
