@@ -5,6 +5,8 @@ public class Book extends Message {
   ArrayList<Position> buy, sell;
 
   public Book(StringTokenizer st) {
+    buy = new ArrayList<>();
+    sell = new ArrayList<>();
     symbol = st.nextToken();
     boolean isBuy = true;
     while(st.hasMoreTokens()) {
