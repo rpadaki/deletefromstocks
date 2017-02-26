@@ -240,7 +240,7 @@ public class Interface {
                 try {
                     System.out.println("TRADE");
                     Trade.tradeVal();
-                    Trade.makeMarketVal();
+                    // Trade.makeMarketVal();
                 } catch(Exception e) {
                     e.printStackTrace(ps);
                 }
