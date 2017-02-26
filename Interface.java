@@ -204,7 +204,7 @@ public class Interface {
                     System.out.println("TRADE");
                     Trade.tradeVal();
                 } catch(Exception e) {
-                    e.printStackTrace(System.out);
+                    e.printStackTrace(ps);
                 }
             }
 
@@ -214,7 +214,7 @@ public class Interface {
                     Trade.tradeVal();
                     // Trade.hedgeVal();
                 } catch(Exception e) {
-                    e.printStackTrace(System.out);
+                    e.printStackTrace(ps);
                 }
             }
         }
