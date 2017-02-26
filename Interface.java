@@ -88,6 +88,7 @@ public class Interface {
     public static void convert(String symbol, String type, int size) {
         String id = Integer.toString(order_id++);
         printToFeed("CONVERT " + id + " " + symbol + " " + type + " " + size);
+        Order order = new Order(type, id, symbol, -1, size, "CONVERT");
         pending_orders.put(order.id, order);
     }
 
