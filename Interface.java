@@ -132,8 +132,9 @@ public class Interface {
     }
 
     public static void book(Book m) {
-        assert(m.buy != null);
-        assert(m.sell != null);
+        if(m.buy.size() == 0 || m.sell.size() == 0){
+            ps.println(m.symbol);
+        }
         stocks.get(m.symbol).updatePositions(m.buy, m.sell);
     }
 
