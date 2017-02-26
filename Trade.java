@@ -89,6 +89,17 @@ public class Trade {
         }
     }
 
+    public static void hedgeVal(String type, int amount) {
+    	// called when fill fills an order of VALE
+    	if (type.equals("SELL")) {
+    		// +10 in case the best offer does not have the right amount
+    		Interface.buy("VALBZ", Valbz.bestOffer().price + 10, amount);
+    	}
+    	else {
+    		Interface.sell("VALBZ", Valbz.bestBid().price - 10, amount);
+    	}
+    }
+
     public static void tradexlf() {
 		/* so similarly if ten xlf is more/less than the sum of the components then sell/buy
 		and do this until you hit the limit
