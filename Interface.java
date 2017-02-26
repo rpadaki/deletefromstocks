@@ -38,6 +38,8 @@ public class Interface {
             message = new Book(st);
         } else if(type.equals("FILL")) {
             message = new Fill(st);
+        } else if(type.equals("CLOSE")) {
+            message = new Close(st);
         } else {
             message = new Message();
             System.out.println("MSG: " + input);
@@ -156,6 +158,8 @@ public class Interface {
                     book((Book) m);
                 } else if(type.equals("FILL")) {
                     fill((Fill) m);
+                } else if(type.equals("CLOSE")) {
+                    System.exit(0);
                 } else {
                 }
             } catch(Exception e) {
