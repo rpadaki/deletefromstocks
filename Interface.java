@@ -20,6 +20,7 @@ public class Interface {
 
     public static void printToFeed(String s) {
         to_exchange.println(s);
+        System.out.println(s);
     }
 
     public static Message parseMessage(String input) {
