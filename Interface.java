@@ -147,7 +147,7 @@ public class Interface {
 
             for(String symbol : SYMBOLS) {
                 Stock stock = stocks.get(symbol);
-                System.out.println(stock.portfolio);
+                System.out.println(symbol + ": " + stock.portfolio);
             }
 
             try {
