@@ -16,6 +16,7 @@ public class Interface {
     public static int order_id;
     static HashMap<String,Order> pending_orders = new HashMap<>();
 
+    public static String hostname;
     public static File log = new File(ERROR_FILE);
     public static PrintStream ps;
 
@@ -59,6 +60,7 @@ public class Interface {
     }
 
     public static void init(String hostname, int port) throws IOException {
+        this.hostname = hostname;
         ps = new PrintStream(log);
 
         Random rand = new Random();
