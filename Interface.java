@@ -26,6 +26,9 @@ public class Interface {
     public static Message parseMessage(String input) {
         StringTokenizer st = new StringTokenizer(input);
         String type = st.nextToken();
+        if(type.equals("CLOSE")){
+            System.exit(0);
+        }
         Message message;
         if(type.equals("HELLO")) {
             message = new Hello(st);
