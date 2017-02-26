@@ -13,7 +13,7 @@ public class deletefromstocks {
             }
             int port = 20000;
             if(args.length >= 2){
-                port = Integer.parseInt(args[2]);
+                port = Integer.parseInt(args[1]);
             }
             System.out.println(args.length);
             System.out.println("HOST: " + hostname);
