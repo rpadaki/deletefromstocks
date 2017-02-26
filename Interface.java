@@ -126,13 +126,18 @@ public class Interface {
                 Message m = readFromFeed();
                 String type = m.type;
                 if(type.equals("HELLO")) {
+                    System.out.println("HELLO");
                 } else if(type.equals("ACK")) {
+                    System.out.println("ACK");
                     ack((Ack) m);
                 } else if(type.equals("REJECT")) {
+                    System.out.println("REJECT");
                     reject((Reject) m);
                 } else if(type.equals("BOOK")) {
+                    System.out.println("BOOK");
                     book((Book) m);
                 } else if(type.equals("FILL")) {
+                    System.out.println("FILL");
                     fill((Fill) m);
                 } else {
                 }
@@ -140,6 +145,7 @@ public class Interface {
             }
 
             try {
+                System.out.println("TRADE");
                 Trade.tradeBonds();
             } catch(Exception e) {
             }
