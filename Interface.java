@@ -138,6 +138,11 @@ public class Interface {
                 }
             } catch(Exception e) {
             }
+
+            try {
+                Trade.tradeBonds();
+            } catch(Exception e) {
+            }
         }
     }
 
