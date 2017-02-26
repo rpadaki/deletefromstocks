@@ -1,10 +1,7 @@
+import java.io.*;
 import java.lang.*;
-import java.io.PrintWriter;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
 import java.net.Socket;
 import java.util.*;
-import java.io.IOException;
 
 public class Interface {
     public static String ERROR_FILE = "error.txt";
@@ -18,6 +15,9 @@ public class Interface {
 
     public static int order_id;
     static HashMap<String,Order> pending_orders = new HashMap<>();
+
+    public static File log = new File(ERROR_FILE);
+    public static PrintStream ps;
 
     public static void printToFeed(String s) {
         to_exchange.println(s);
@@ -59,6 +59,8 @@ public class Interface {
     }
 
     public static void init(String hostname, int port) throws IOException {
+        ps = new PrintStream(log);
+
         Random rand = new Random();
         order_id = Math.abs(rand.nextInt()) % 1000000;
 
@@ -178,7 +180,7 @@ public class Interface {
                 } else {
                 }
             } catch(Exception e) {
-                e.printStackTrace(System.out);
+                e.printStackTrace(ps);
             }
 
             for(String symbol : SYMBOLS) {
@@ -190,14 +192,16 @@ public class Interface {
                 System.out.println("TRADE");
                 Trade.tradeBonds();
             } catch(Exception e) {
-                e.printStackTrace(System.out);
+                e.printStackTrace(ps.out);
             }
 
-            try {
-                System.out.println("TRADE");
-                // Trade.tradeVal();
-            } catch(Exception e) {
-                e.printStackTrace(System.out);
+            if (!hostname.equals("PRODUCTION")) {
+                try {
+                    System.out.println("TRADE");
+                    // Trade.tradeVal();
+                } catch(Exception e) {
+                    e.printStackTrace(ps);
+                }
             }
         }
     }
