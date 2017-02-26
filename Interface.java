@@ -200,13 +200,19 @@ public class Interface {
                 } catch (Exception e) {
                     e.printStackTrace(ps);
                 }
+                try {
+                    System.out.println("TRADE");
+                    Trade.tradeVal();
+                } catch(Exception e) {
+                    e.printStackTrace(System.out);
+                }
             }
 
             if (!hn.equals("production")) {
                 try {
                     System.out.println("TRADE");
                     Trade.tradeVal();
-                    Trade.hedgeVal();
+                    // Trade.hedgeVal();
                 } catch(Exception e) {
                     e.printStackTrace(System.out);
                 }
