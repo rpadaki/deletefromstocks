@@ -41,7 +41,7 @@ public class Trade {
             int numtoconvert = Math.min(numtoexchange - Valbz.limit + Valbz.q(), numtoexchange - (-1) * Vale.limit + Vale.q());
             Interface.sell("VALE", valelow, numtoexchange - numtoconvert);
             Interface.buy("VALBZ", valbzhigh, numtoexchange - numtoconvert);
-            if (numtoconvert > 0 && valelow - valbzhigh > 10) {
+            if (numtoconvert > 0 && valelow - valbzhigh > (10.0/numtoconvert)) {
                 Interface.convert("VALE", "BUY", numtoconvert);
                 Interface.sell("VALE", valelow, numtoconvert);
             	Interface.buy("VALBZ", valbzhigh, numtoconvert);
@@ -52,12 +52,32 @@ public class Trade {
             int numtoconvert = Math.min(numtoexchange - (-1) * Valbz.limit + Valbz.q(), numtoexchange - Vale.limit + Vale.q());
             Interface.sell("VALBZ", valbzlow, numtoexchange - numtoconvert);
             Interface.buy("VALE", valehigh, numtoexchange - numtoconvert);
-            if (numtoconvert > 0 && valbzlow - valehigh > 10) {
+            if (numtoconvert > 0 && valbzlow - valehigh > (10.0/numtoconvert)) {
                 Interface.convert("VALE", "SELL", numtoconvert);
                 Interface.sell("VALBZ", valbzlow, numtoconvert);
             	Interface.buy("VALE", valehigh, numtoconvert);
             }
         }
+    }
+
+    public static void makeMarketVal() {
+    	Stock Vale = Interface.stocks.get("VALE");
+        Stock Valbz = Interface.stocks.get("VALBZ");
+        int valelow = Vale.bestBid().price;
+        int valehigh = Vale.bestOffer().price;
+        int valbzlow = Valbz.bestBid().price;
+        int valbzhigh = Valbz.bestOffer().price;
+
+        int add = 2;
+
+        int sellamount = Vale.q() - Vale.selling() + Vale.limit;
+        int buyamount = - Vale.q() - Vale.buying() + Vale.limit;
+
+        int lowprice = valbzlow - add;
+        int highprice = valbzhigh + add;
+
+        Interface.sell("VALE", highprice, sellamount);
+        Interface.buy("VALE", lowprice, buyamount);
     }
 
     public static void tradexlf() {
