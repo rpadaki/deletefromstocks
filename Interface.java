@@ -76,27 +76,42 @@ public class Interface {
     public static void buy(String symbol, int price, int size) {
         if(size <= 0) return;
         String id = Integer.toString(order_id++);
-        makeOrder(new Order("BUY", id, symbol, price, size));
+        makeOrder(new Order("BUY", id, symbol, price, size, "ADD"));
     }
 
     public static void sell(String symbol, int price, int size) {
         if(size <= 0) return;
         String id = Integer.toString(order_id++);
-        makeOrder(new Order("SELL", id, symbol, price, size));
+        makeOrder(new Order("SELL", id, symbol, price, size, "ADD"));
     }
 
     public static void convert(String symbol, String type, int size) {
         String id = Integer.toString(order_id++);
-        // printToFeed("CONVERT " + id + " " + symbol + " " + type + " " + size);
+        printToFeed("CONVERT " + id + " " + symbol + " " + type + " " + size);
+        pending_orders.put(order.id, order);
     }
 
     public static void ack(Ack m) {
         Order order = pending_orders.get(m.id);
         Stock stock = stocks.get(order.symbol);
-        if(order.type.equals("BUY")) {
-            stock.ourBids.add(order);
+        if(order.form.equals("ADD")) {
+            if (order.type.equals("BUY")) {
+                stock.ourBids.add(order);
+            } else {
+                stock.ourOffers.add(order);
+            }
         } else {
-            stock.ourOffers.add(order);
+            if(order.symbol.equals("VALE")) {
+                Stock vale = stocks.get("VALE");
+                Stock valbz = stocks.get("VALBZ");
+                if(order.type.equals("BUY")) {
+                    vale.portfolio += order.pos.size;
+                    valbz.portfolio -= order.pos.size;
+                } else {
+                    vale.portfolio -= order.pos.size;
+                    valbz.portfolio += order.pos.size;
+                }
+            }
         }
         pending_orders.remove(m.id);
     }
