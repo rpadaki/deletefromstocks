@@ -193,15 +193,16 @@ public class Interface {
                 System.out.println(symbol + ": " + stock.q() + " " + stock.selling() + " " + stock.buying());
             }
 
-            try {
-                System.out.println("TRADE");
-                Trade.tradeBonds();
-            } catch(Exception e) {
-                e.printStackTrace(ps);
+            if(hn.equals("production")) {
+                try {
+                    System.out.println("TRADE");
+                    Trade.tradeBonds();
+                } catch (Exception e) {
+                    e.printStackTrace(ps);
+                }
             }
 
             if (!hn.equals("production")) {
-                System.out.println(hn);
                 try {
                     System.out.println("TRADE");
                     Trade.tradeVal();
