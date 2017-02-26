@@ -16,7 +16,7 @@ public class Interface {
     public static int order_id;
     static HashMap<String,Order> pending_orders = new HashMap<>();
 
-    public static String hostname;
+    public static String hn;
     public static File log = new File(ERROR_FILE);
     public static PrintStream ps;
 
@@ -60,7 +60,7 @@ public class Interface {
     }
 
     public static void init(String hostname, int port) throws IOException {
-        this.hostname = hostname;
+        hn = hostname;
         ps = new PrintStream(log);
 
         Random rand = new Random();
@@ -194,10 +194,10 @@ public class Interface {
                 System.out.println("TRADE");
                 Trade.tradeBonds();
             } catch(Exception e) {
-                e.printStackTrace(ps.out);
+                e.printStackTrace(ps);
             }
 
-            if (!hostname.equals("PRODUCTION")) {
+            if (!hn.equals("PRODUCTION")) {
                 try {
                     System.out.println("TRADE");
                     // Trade.tradeVal();
