@@ -58,7 +58,7 @@ public class Interface {
         printToFeed("HELLO DELETEFROMSTOCKS");
 
         Random rand = new Random();
-        order_id = rand.nextInt() % 1000000;
+        order_id = Math.abs(rand.nextInt()) % 1000000;
 
         for(int i = 0; i < SYMBOLS.length; i++){
             String symbol = SYMBOLS[i];
