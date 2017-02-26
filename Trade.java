@@ -80,6 +80,13 @@ public class Trade {
 
         Interface.sell("VALE", highprice, sellamount);
         Interface.buy("VALE", lowprice, buyamount);
+
+        if (Vale.q() == Vale.limit) {
+        	Interface.convert("VALE", "SELL", 12);
+        }
+        else if (Vale.q() == - Vale.limit) {
+        	Interface.convert("VALE", "BUY", 12);
+        }
     }
 
     public static void tradexlf() {
