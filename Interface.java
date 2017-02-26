@@ -157,6 +157,7 @@ public class Interface {
         for(int i = 0; i < m.symbols.size(); i++) {
             String symbol = m.symbols.get(i);
             int pos = m.positions.get(i);
+            ps.print(symbol);
             stocks.get(symbol).portfolio = pos;
         }
     }
