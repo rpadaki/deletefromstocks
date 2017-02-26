@@ -175,6 +175,7 @@ public class Interface {
                 } else {
                 }
             } catch(Exception e) {
+                e.printStackTrace(System.out);
             }
 
             for(String symbol : SYMBOLS) {
@@ -185,8 +186,15 @@ public class Interface {
             try {
                 System.out.println("TRADE");
                 Trade.tradeBonds();
+            } catch(Exception e) {
+                e.printStackTrace(System.out);
+            }
+
+            try {
+                System.out.println("TRADE");
                 Trade.tradeVal();
             } catch(Exception e) {
+                e.printStackTrace(System.out);
             }
         }
     }
